@@ -1,16 +1,16 @@
 import { create } from "zustand"
 
-interface Osos {
+type Oso = {
     id: number
     name: string
 }
 
-type BearState = {
+interface BearState {
     blackBear: number
     polarBear: number
     pandaBear: number
     
-    osos: Osos[]
+    osos: Oso[]
 
     incrementBlack: (numero: number) => void
     incrementPolar: (numero: number) => void
@@ -21,6 +21,7 @@ type BearState = {
 
     actualizarSiHayNuevos: () => void
     addBear: () => void
+    clearBears: () => void;
 }
 
 export const useBearState = create<BearState>((set) => ({
@@ -29,7 +30,7 @@ export const useBearState = create<BearState>((set) => ({
     pandaBear: 0,
 
 
-    osos: [{id: 1, name: 'Oso #1'}],
+    osos: [],
 
     incrementBlack: (numero: number) => {
         set((state) => {
@@ -49,7 +50,7 @@ export const useBearState = create<BearState>((set) => ({
             return {pandaBear: newState}
         })
     },
-    
+
     deleteBlackBears: () => {
         set((state) => {
             state.blackBear = 0
@@ -79,10 +80,16 @@ export const useBearState = create<BearState>((set) => ({
 
     addBear: () => {
         set((state) => {
-            const os: Osos = {id: state.osos.length + 1,
+            const os: Oso = {id: state.osos.length + 1,
                                 name: `Oso #${state.osos.length + 1}`}
             const newState = [...state.osos, os]
             return { osos: newState}
+        })
+    },
+
+    clearBears: () =>{
+        set({
+            osos: [],
         })
     }
 }))

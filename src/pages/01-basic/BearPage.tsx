@@ -116,41 +116,37 @@ export const PandaBears = () => {
 export const ActualizarSiHayNuevos = () => {
   const osos = useBearState(useShallow(state => state.osos))
   const refreshOsos = useBearState(state => state.actualizarSiHayNuevos)
-  
+  const addBear = useBearState(state => state.addBear);
+  const clearBears = useBearState(state => state.clearBears);
 
-
-
-
-
-
-
-
-
-
-  const addBear = useBearState(state => state.addBear)
 
   const oso = JSON.stringify(osos, null, 2)
 
 
   return (
-    <WhiteCard>
-      <h1>Osos:</h1>
+      <WhiteCard>
+          <h1>Osos:</h1>
 
-      <pre>
+          <pre>
         {oso}
       </pre>
 
-      <button
-        onClick={refreshOsos}
-      >
-        refresh
-      </button>
+          <button
+              onClick={refreshOsos}
+          >
+              refresh
+          </button>
 
-      <button
-        onClick={addBear}
-      >
-        addBear
-      </button>
-    </WhiteCard>
+          <button
+              onClick={addBear}
+          >
+              addBear
+          </button>
+          <button
+              onClick={clearBears}
+          >
+              Clear Bears
+          </button>
+      </WhiteCard>
   )
 }
