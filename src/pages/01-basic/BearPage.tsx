@@ -1,6 +1,8 @@
 import { useShallow } from 'zustand/react/shallow';
 import { WhiteCard } from '../../components';
 import { useBearState } from '../../stores/bears/bears.store';
+import {IoPawOutline} from "react-icons/io5";
+import {useEffect} from "react";
 
 export const BearPage = () => {
 
@@ -120,33 +122,54 @@ export const ActualizarSiHayNuevos = () => {
   const clearBears = useBearState(state => state.clearBears);
 
 
-  const oso = JSON.stringify(osos, null, 2)
+  const oso = JSON.stringify(osos, null, 2);
+  const totalBears = useBearState(state => state.totalBears);
+  const totalOsos = useBearState(state => state.totalOsos);
+  const blackBears = useBearState(state => state.blackBear);
+  const polarBears = useBearState(state => state.polarBear);
+  const pandaBears = useBearState(state => state.pandaBear);
 
+    useEffect(() => {
+        totalBears();
+        totalOsos;
+    }, [osos, blackBears, polarBears, pandaBears]);
 
   return (
-      <WhiteCard>
-          <h1>Osos:</h1>
+      <>
 
-          <pre>
+          <WhiteCard>
+              <h1>Osos:</h1>
+
+              <pre>
         {oso}
       </pre>
 
-          <button
-              onClick={refreshOsos}
-          >
-              refresh
-          </button>
+              <button
+                  onClick={refreshOsos}
+              >
+                  refresh
+              </button>
 
-          <button
-              onClick={addBear}
-          >
-              addBear
-          </button>
-          <button
-              onClick={clearBears}
-          >
-              Clear Bears
-          </button>
-      </WhiteCard>
+              <button
+                  onClick={addBear}
+              >
+                  addBear
+              </button>
+              <button
+                  onClick={clearBears}
+              >
+                  Clear Bears
+              </button>
+          </WhiteCard>
+
+          <WhiteCard centered>
+              <IoPawOutline size={ 50 } className="text-indigo-600" />
+              <h2>Osos</h2>
+              <p>{totalOsos}</p>
+          </WhiteCard>
+      </>
+
+
+
   )
 }
