@@ -25,11 +25,11 @@ interface BearState {
     clearBears: () => void;
     totalBears: () => void;
 
+    //total bears pero con propiedades computadas
     computed: {
         computedTotalBears: number;
     }
 
-    //total bears pero con propiedades computadas
 
 }
 
@@ -113,6 +113,7 @@ export const useBearState = create<BearState>((set, get) => ({
         set({ totalOsos: suma });
     },
 
+    //Propiedad Computada
     //MODO EFICIENTE DE CONTAR Y PASAR DATOS DE UN STORE A LAS PAGINAS(No necesita nada mas, solo llamar en cualquier pagina)
     computed: {
         get computedTotalBears(): number {
