@@ -1,5 +1,6 @@
 import { type StateCreator, create} from "zustand";
-import {persist} from "zustand/middleware";
+import { persist } from "zustand/middleware";
+import {customSessionStorage} from "../storages/session-storage.storage.ts";
 
 
 interface PersonState {
@@ -28,7 +29,8 @@ const storeApi: StateCreator<PersonState & Actions> = (set) => ({
 
 
 export const usePersonStore = create<PersonState & Actions>()(
-    persist(storeApi, {name: 'person-storage'}),
-    //aqui debajo se pueden seguir agregando middlewares
-
+    persist(storeApi, {
+        name: 'person-storage',
+        storage: customSessionStorage,
+    }),
 );
